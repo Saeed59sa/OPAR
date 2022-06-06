@@ -198,6 +198,14 @@ static void ui_draw_vision_lane_lines(UIState *s) {
     track_bg = nvgLinearGradient(s->vg, s->fb_w, s->fb_h, s->fb_w, s->fb_h * .4,
                                         COLOR_WHITE_ALPHA(150), COLOR_WHITE_ALPHA(20));
   }
+
+
+    for (int i = 0; i < std::size(scene.test_line_vertices); i++) {
+      NVGcolor color = nvgRGBAf(1.0, 0, 0, scene.test_line_probs[i]);
+      ui_draw_line(s, scene.test_line_vertices[i], &color, nullptr);
+    }
+
+
   // paint path
   ui_draw_line(s, scene.track_vertices, nullptr, &track_bg);
 }
