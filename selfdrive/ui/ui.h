@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QColor>
+#include <QFuture>
 #include <QTransform>
 #include "nanovg.h"
 
@@ -277,7 +278,7 @@ typedef struct UIScene {
   bool dm_active, engageable;
 
   // lead
-  vertex_data lead_vertices[2];
+  vertex_data  lead_vertices[2];
 
   float light_sensor, accel_sensor, gyro_sensor;
   bool started, ignition, is_metric, longitudinal_control, end_to_end;

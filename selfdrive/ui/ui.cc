@@ -35,6 +35,9 @@ static bool calib_frame_to_full_frame(const UIState *s, float in_x, float in_y, 
   return false;
 }
 
+
+
+
 static int get_path_length_idx(const cereal::ModelDataV2::XYZTData::Reader &line, const float path_height) {
   const auto line_x = line.getX();
   int max_idx = 0;
@@ -76,7 +79,7 @@ static void update_line_data(const UIState *s, const cereal::ModelDataV2::XYZTDa
 
   std::vector<QPointF> left_points, right_points;
   for (int i = 0; i <= max_idx; i++) {
-    QPointF left, right;
+    vertex_data left, right;
     bool l = calib_frame_to_full_frame(s, line_x[i], line_y[i] - y_off, line_z[i] + z_off, &left);
     bool r = calib_frame_to_full_frame(s, line_x[i], line_y[i] + y_off, line_z[i] + z_off, &right);
     if (l && r) {
@@ -129,7 +132,7 @@ static void update_model(UIState *s, const cereal::ModelDataV2::Reader &model) {
 
 
   // update test lines
-  for (int i = 0; i < std::size(scene.lane_line_vertices); i++) {
+  for (int i = 0; i < std::size(scene.test_line_vertices); i++) {
     scene.test_line_probs[i] = lane_line_probs[i];
     //update_line_data(s, lane_lines[i], 0.025 * scene.lane_line_probs[i], 0, &scene.lane_line_vertices[i], max_idx);
     update_line_data(s, lane_lines[i], 0.9 * scene.lane_line_probs[i], 0, &scene.test_line_vertices[i], max_idx);

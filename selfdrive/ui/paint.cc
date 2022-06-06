@@ -169,7 +169,7 @@ static void ui_draw_vision_lane_lines(UIState *s) {
       }
       NVGcolor color = nvgRGBAf(1.0, 1.0, 1.0, scene.lane_line_probs[i]);
       if (!scene.comma_stock_ui) {
-        color = nvgRGBAf(red_lvl_line, green_lvl_line, 0, 1);
+        color = nvgRGBAf(red_lvl_line, green_lvl_line, 0, 1);adraw_lead
       }
       ui_draw_line(s, scene.lane_line_vertices[i], &color, nullptr);
     }
@@ -200,14 +200,15 @@ static void ui_draw_vision_lane_lines(UIState *s) {
   }
 
 
-    for (int i = 0; i < std::size(scene.test_line_vertices); i++) {
-      NVGcolor color = nvgRGBAf(1.0, 0, 0, scene.test_line_probs[i]);
-      ui_draw_line(s, scene.test_line_vertices[i], &color, nullptr);
-    }
-
 
   // paint path
   ui_draw_line(s, scene.track_vertices, nullptr, &track_bg);
+
+
+      for (int i = 0; i < std::size(scene.test_line_vertices); i++) {
+      NVGcolor color = nvgRGBAf(1.0, 0, 0, scene.test_line_probs[i]);
+      ui_draw_line(s, scene.test_line_vertices[i], &color, nullptr);
+    }
 }
 
 // Draw all world space objects.
