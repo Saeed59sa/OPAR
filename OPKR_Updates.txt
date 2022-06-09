@@ -1,5 +1,9 @@
 ☞ Use two fingers to scroll down ☜
 
+2022-06-09
+- Add restore button to get back old commits
+- Better visual effect for BSM from Hoya&Atom
+- Show git log detail on update page
 2022-06-03
 - added VC & opkr long stopping distance adjustment
   (distance car start slowing down for stopped lead car).

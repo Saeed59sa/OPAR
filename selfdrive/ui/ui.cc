@@ -68,6 +68,37 @@ static void update_line_data(const UIState *s, const cereal::ModelDataV2::XYZTDa
   assert(pvd->cnt <= std::size(pvd->v));
 }
 
+
+static void update_blindspot_data(const UIState *s, int lr, const cereal::ModelDataV2::XYZTData::Reader &line,
+                             float y_off,  float z_off, line_vertices_data *pvd, int max_idx ) {
+
+  float  y_off1, y_off2;
+
+  if( lr == 0 )
+  {
+    y_off1 = y_off;
+    y_off2 = -0.01;
+  }
+  else
+  {
+      y_off1 = 0.01;
+      y_off2 = y_off;  
+  }
+     
+
+  const auto line_x = line.getX(), line_y = line.getY(), line_z = line.getZ();
+  vertex_data *v = &pvd->v[0];
+  for (int i = 0; i <= max_idx; i++) {
+    v += calib_frame_to_full_frame(s, line_x[i], line_y[i] - y_off1, line_z[i] + z_off, v);
+  }
+  for (int i = max_idx; i >= 0; i--) {
+    v += calib_frame_to_full_frame(s, line_x[i], line_y[i] + y_off2, line_z[i] + z_off, v);
+  }
+  pvd->cnt = v - pvd->v;
+  assert(pvd->cnt <= std::size(pvd->v));
+}
+
+
 static void update_stop_line_data(const UIState *s, const cereal::ModelDataV2::StopLineData::Reader &line,
                                   float x_off, float y_off, float z_off, line_vertices_data *pvd) {
   const auto line_x = line.getX(), line_y = line.getY(), line_z = line.getZ();
@@ -111,6 +142,13 @@ static void update_model(UIState *s, const cereal::ModelDataV2::Reader &model) {
   }
   max_idx = get_path_length_idx(model_position, max_distance);
   update_line_data(s, model_position, 0.5, 1.22, &scene.track_vertices, max_idx);
+
+   // update blindspot line
+  for (int i = 0; i < std::size(scene.lane_blindspot_vertices); i++) {
+    scene.lane_blindspot_probs[i] = lane_line_probs[i];
+    update_blindspot_data(s, i, lane_lines[i+1], 2.8, 0, &scene.lane_blindspot_vertices[i], max_idx);
+  }   
+
 
   // update stop lines
   if (scene.stop_line) {

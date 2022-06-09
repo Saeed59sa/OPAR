@@ -8,10 +8,5 @@ export PYTHONPATH=/data/openpilot
 cd /data/openpilot
 ping -q -c 1 -w 1 google.com &> /dev/null
 if [ "$?" == "0" ]; then
-  /data/data/com.termux/files/usr/bin/git reset --keep HEAD@{1}
-  if [ -f "/data/openpilot/prebuilt" ]; then
-    pkill -f thermald
-    rm -f /data/openpilot/prebuilt
-  fi
-  reboot
+  git log --date=human --pretty=format:"%h, %ad : %s" -n 30 > /data/params/d/GitCommits
 fi

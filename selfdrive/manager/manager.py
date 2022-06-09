@@ -223,6 +223,8 @@ def manager_init() -> None:
     ("MultipleLateralAng", "10,30"),
     ("StoppingDist", "35"),
     ("SpeedCameraOffset", "0"),
+    ("HoldForSetting", "1"),
+    ("RTShield", "1"),
    ]
   if not PC:
     default_params.append(("LastUpdateTime", datetime.datetime.utcnow().isoformat().encode('utf8')))

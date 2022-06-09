@@ -12,6 +12,7 @@ EnableUploader = Params().get_bool('OpkrEnableUploader')
 EnableOSM = Params().get_bool('OSMEnable') or Params().get_bool('OSMSpeedLimitEnable') or Params().get("CurvDecelOption", encoding="utf8") == "1" or Params().get("CurvDecelOption", encoding="utf8") == "3"
 EnableMapbox = Params().get_bool('MapboxEnabled')
 EnableShutdownD = Params().get_bool('C2WithCommaPower')
+EnableRTShield = Params().get_bool('RTShield')
 
 procs = [
   DaemonProcess("manage_athenad", "selfdrive.athena.manage_athenad", "AthenadPid"),
@@ -80,6 +81,10 @@ if EnableMapbox:
 if EnableShutdownD:
   procs += [
     PythonProcess("shutdownd", "selfdrive.hardware.eon.shutdownd", enabled=EON),
+  ]
+if EnableRTShield:
+  procs += [
+    PythonProcess("rtshield", "selfdrive.rtshield", enabled=EON),
   ]
 
 managed_processes = {p.name: p for p in procs}

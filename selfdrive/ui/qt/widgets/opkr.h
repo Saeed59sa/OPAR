@@ -761,6 +761,30 @@ public:
   }
 };
 
+class HoldForSettingToggle : public ToggleControl {
+  Q_OBJECT
+
+public:
+  HoldForSettingToggle() : ToggleControl("Hold Button for Setting Menu", "Use 0.5 sec delay to enter setting menu. This is to prevent being touched in setting menu when you use external program(Mixplorer, etc)", "../assets/offroad/icon_shell.png", Params().getBool("HoldForSetting")) {
+    QObject::connect(this, &HoldForSettingToggle::toggleFlipped, [=](int state) {
+      bool status = state ? true : false;
+      Params().putBool("HoldForSetting", status);
+    });
+  }
+};
+
+class RTShieldToggle : public ToggleControl {
+  Q_OBJECT
+
+public:
+  RTShieldToggle() : ToggleControl("Enable RTShield Process", "Seems regarding process stability. This uses resource.", "../assets/offroad/icon_shell.png", Params().getBool("RTShield")) {
+    QObject::connect(this, &RTShieldToggle::toggleFlipped, [=](int state) {
+      bool status = state ? true : false;
+      Params().putBool("RTShield", status);
+    });
+  }
+};
+
 // openpilot preview
 class OpenpilotView : public AbstractControl {
   Q_OBJECT
@@ -799,8 +823,11 @@ public:
   BranchSelectCombo();
 
 private:
+  QPushButton btn;
   QComboBox combobox;
   Params params;
+
+  void refresh();
 };
 
 class TimeZoneSelectCombo : public AbstractControl 

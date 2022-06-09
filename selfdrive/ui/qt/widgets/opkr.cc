@@ -318,7 +318,7 @@ CarSelectCombo::CarSelectCombo() : AbstractControl("", "", "")
     if (combobox.currentIndex() != 0) {
       if (ConfirmationDialog::confirm("Press OK to set your car as\n" + str, this)) {
         params.put("CarModel", str.toStdString());
-        int indi_cars[] = {1, 2, 3, 4, 10, 29, 30, 37}; //R-MDPS type such as Genesis, Sonata Turbo, Sorento, Mohave
+        int indi_cars[] = {8, 32, 39, 40, 41, 42, 43, 44, 45}; //R-MDPS type such as Genesis, Sonata Turbo, Sorento, Mohave
         int selected_car = combobox.currentIndex();
         bool go_indi = std::find(std::begin(indi_cars), std::end(indi_cars), selected_car) != std::end(indi_cars);
         if (go_indi) {
@@ -360,20 +360,26 @@ BranchSelectCombo::BranchSelectCombo() : AbstractControl("", "", "")
     height: 120px;
   )");
 
-  combobox.addItem("Select Branch you want to change");
-  QFile branchlistfile("/data/openpilot/selfdrive/assets/addon/script/branches");
-  if (branchlistfile.open(QIODevice::ReadOnly)) {
-    QTextStream carname(&branchlistfile);
-    while (!carname.atEnd()) {
-      QString line = carname.readLine();
-      combobox.addItem(line);
-    }
-    branchlistfile.close();
-  }
+  combobox.setFixedWidth(1055);
 
-  combobox.setFixedWidth(1205);
+  btn.setStyleSheet(R"(
+    padding: 0;
+    border-radius: 50px;
+    font-size: 35px;
+    font-weight: 500;
+    color: #E4E4E4;
+    background-color: #393939;
+  )");
+
+  btn.setFixedSize(150, 100);
+  btn.setText("RELOAD");
+
+  QObject::connect(&btn, &QPushButton::clicked, [=]() {
+    refresh();
+  });
 
   hlayout->addWidget(&combobox);
+  hlayout->addWidget(&btn, Qt::AlignRight);
 
   QObject::connect(&combobox, static_cast<void(QComboBox::*)(int)>(&QComboBox::activated), [=](int index)
   {
@@ -385,19 +391,35 @@ BranchSelectCombo::BranchSelectCombo() : AbstractControl("", "", "")
         QString cmd1 = "git -C /data/openpilot remote set-branches --add origin " + str;
         QString cmd2 = "git -C /data/openpilot checkout --track origin/" + str;
         QString cmd3 = "git -C /data/openpilot checkout " + str;
+        QProcess::execute("git -C /data/openpilot clean -d -f -f");
         QProcess::execute(cmd1);
         QProcess::execute("git -C /data/openpilot fetch origin");
         QProcess::execute(cmd2);
         QProcess::execute(cmd3);
-        QProcess::execute("git -C /data/openpilot pull");
-        QProcess::execute("pkill -f thermald");
-        QProcess::execute("rm -f /data/openpilot/prebuilt");
-        QProcess::execute("reboot");
+        std::system("/data/openpilot/selfdrive/assets/addon/script/git_reset.sh");
       }
     } else if (combobox.currentIndex() != 0 && str == current_branch) {
       if (ConfirmationDialog::alert("Your branch is already <" + current_branch + ">.", this)) {combobox.setCurrentIndex(0);}
     }
   });
+  refresh();
+}
+
+void BranchSelectCombo::refresh() {
+  QProcess::execute("git -C /data/openpilot remote prune origin");
+  QProcess::execute("git -C /data/openpilot fetch origin");
+  combobox.clear();
+  combobox.addItem("Select Branch you want to change");
+  std::system("git -C /data/openpilot ls-remote --refs | grep refs/heads | awk -F '/' '{print $3}' > /data/branches");
+  QFile branchlistfile("/data/branches");
+  if (branchlistfile.open(QIODevice::ReadOnly)) {
+    QTextStream carname(&branchlistfile);
+    while (!carname.atEnd()) {
+      QString line = carname.readLine();
+      combobox.addItem(line);
+    }
+    branchlistfile.close();
+  }
 }
 
 TimeZoneSelectCombo::TimeZoneSelectCombo() : AbstractControl("", "", "") 

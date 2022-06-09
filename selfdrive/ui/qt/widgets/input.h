@@ -6,8 +6,10 @@
 #include <QString>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QListWidget>
 
 #include "selfdrive/ui/qt/widgets/keyboard.h"
+#include "selfdrive/common/params.h"
 
 
 class QDialogBase : public QDialog {
@@ -75,6 +77,19 @@ class UpdateInfoDialog : public QDialogBase {
 
 public:
   explicit UpdateInfoDialog(const QString &prompt_text, const QString &confirm_text,
-                            const QString &cancel_text, QWidget* parent);
+                            const QString &cancel_text, const QString &detail_text, QWidget* parent);
   static bool confirm(const QString &prompt_text, QWidget *parent);
+};
+
+// Git Pull Cancel
+class GitPullCancel : public QDialogBase {
+  Q_OBJECT
+
+public:
+  explicit GitPullCancel(const QString &confirm_text,
+                            const QString &cancel_text, QWidget* parent);
+  static bool confirm(QWidget *parent);
+
+private:
+  Params params;
 };

@@ -4,7 +4,7 @@
 #include <QMap>
 #include <QTimer>
 
-//#include "selfdrive/common/params.h"
+#include "selfdrive/common/params.h"
 #include "selfdrive/ui/ui.h"
 
 typedef QPair<QString, QColor> ItemStatus;
@@ -63,7 +63,7 @@ protected:
   const QColor warning_color = QColor(218, 202, 37);
   const QColor danger_color = QColor(201, 34, 49);
 
-  //Params params;
+  Params params;
   ItemStatus connect_status, panda_status, temp_status;
   QString net_type;
   int net_strength = 0;

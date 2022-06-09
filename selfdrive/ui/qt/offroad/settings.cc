@@ -300,10 +300,10 @@ SoftwarePanel::SoftwarePanel(QWidget* parent) : ListWidget(parent) {
     
     if (!last_ping.length()) {
       desc += QString("Network connection is missing or unstable. Check the connection.");
-      if (ConfirmationDialog::alert(desc, this)) {}
+      ConfirmationDialog::alert(desc, this);
     } else if (commit_local == commit_remote) {
       desc += QString("Local and remote match. No update required.");
-      if (ConfirmationDialog::alert(desc, this)) {}
+      ConfirmationDialog::alert(desc, this);
     } else {
       if (QFileInfo::exists("/data/OPKR_Updates.txt")) {
         QFileInfo fileInfo;
@@ -411,11 +411,10 @@ SoftwarePanel::SoftwarePanel(QWidget* parent) : ListWidget(parent) {
   addItem(gitresetbtn);
 
   const char* gitpull_cancel = "/data/openpilot/selfdrive/assets/addon/script/gitpull_cancel.sh ''";
-  auto gitpullcanceltbtn = new ButtonControl("Cancel Git Pull", "RUN");
+  auto gitpullcanceltbtn = new ButtonControl("GitPull Restore", "RUN");
   QObject::connect(gitpullcanceltbtn, &ButtonControl::clicked, [=]() {
-    if (ConfirmationDialog::confirm("Return to the state before GitPull. Do you want to proceed?", this)){
-      std::system(gitpull_cancel);
-    }
+    std::system(gitpull_cancel);
+    GitPullCancel::confirm(this);
   });
   addItem(gitpullcanceltbtn);
 
@@ -593,6 +592,8 @@ UIPanel::UIPanel(QWidget *parent) : QFrame(parent) {
   layout->addWidget(new RPMAnimatedToggle());
   layout->addWidget(new RPMAnimatedMaxValue());
   layout->addWidget(new ShowStopLineToggle());
+  layout->addWidget(new HoldForSettingToggle());
+  layout->addWidget(new RTShieldToggle());
 }
 
 DrivingPanel::DrivingPanel(QWidget *parent) : QFrame(parent) {

@@ -78,10 +78,12 @@ void Sidebar::mousePressEvent(QMouseEvent *event) {
 
 void Sidebar::mouseReleaseEvent(QMouseEvent *event) {
   const quint64 pressTime = QDateTime::currentMSecsSinceEpoch() - mLastPressTime;
-  if ( pressTime > MY_LONG_PRESS_THRESHOLD && trig_settings) {
+  if (!params.getBool("HoldForSetting")) {
+    emit openSettings();
+  } else if ( pressTime > MY_LONG_PRESS_THRESHOLD && trig_settings) {
     emit openSettings();
   } else if ( pressTime < 300 && trig_settings) {
-    ConfirmationDialog::alert("Hold 0.5 sec on the button to enter Setting Menu", this);
+    ConfirmationDialog::alert("Hold 0.5 sec on the button to enter Setting Menu.", this);
   }
 }
 

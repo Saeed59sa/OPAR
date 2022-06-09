@@ -146,7 +146,7 @@ class LanePlanner:
     else:
       self.road_edge_offset = 0.0
     if self.speed_offset:
-      speed_offset = -interp(v_ego, [0, 11.1, 16.6, 22.2, 31], [0.12, 0.06, 0.03, 0.01, 0.0])
+      speed_offset = -interp(v_ego, [0, 11.1, 16.6, 22.2, 31], [0.10, 0.05, 0.02, 0.01, 0.0])
     else:
       speed_offset = 0.0
     self.total_camera_offset = self.camera_offset + lean_offset + current_road_offset + self.road_edge_offset + speed_offset
