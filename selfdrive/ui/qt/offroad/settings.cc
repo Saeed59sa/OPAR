@@ -39,53 +39,53 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
   std::vector<std::tuple<QString, QString, QString, QString>> toggles{
     {
       "OpenpilotEnabledToggle",
-      "Enable openpilot",
-      "Use the openpilot system for adaptive cruise control and lane keep driver assistance. Your attention is required at all times to use this feature. Changing this setting takes effect when the car is powered off.",
+      "تشغيل نظام القيادة",
+      "استخدم نظام القيادة الذاتية للتحكم التكيفي في ثبات السرعة والحفاظ على مساعدة السائق. انتباهك مطلوب في جميع الأوقات لاستخدام هذه الميزة. يسري تغيير هذا الإعداد عند إيقاف تشغيل النظام,
       "../assets/offroad/icon_openpilot.png",
     },
     {
       "IsLdwEnabled",
-      "Enable Lane Departure Warnings",
-      "Receive alerts to steer back into the lane when your vehicle drifts over a detected lane line without a turn signal activated while driving over 31 mph (50 km/h).",
+      "تفعيل تحذيرات مغادرة حارة السير",
+      "تصدر تنبيهات للتوجيه عندما تنجرف سيارتك فوق خط المسار المكتشف دون تنشيط إشارة الانعطاف أثناء القيادة لمسافة تزيد عن 31 ميلاً في الساعة (50 كم / ساعة).",
       "../assets/offroad/icon_warning.png",
     },
     {
       "IsRHD",
-      "Enable Right-Hand Drive",
-      "Allow openpilot to obey left-hand traffic conventions and perform driver monitoring on right driver seat.",
+      "تفعيل نظام المقود الايمن",
+      "اسمح لنظام القيادة الذاتية بتغير لاتفاقيات المرور اليسرى وإجراء مراقبة للسائق على مقعد السائق الأيمن.",
       "../assets/offroad/icon_openpilot_mirrored.png",
     },
     {
       "IsMetric",
-      "Use Metric System",
+      "استخدام النظام المتري",
       "Display speed in km/h instead of mph.",
       "../assets/offroad/icon_metric.png",
     },
     {
       "RecordFront",
-      "Record and Upload Driver Camera",
-      "Upload data from the driver facing camera and help improve the driver monitoring algorithm.",
+      "تسجيل وتحميل كاميرا برنامج التشغيل",
+      "قم بتحميل البيانات من الكاميرا التي تواجه السائق وساعد في تحسين خوارزمية مراقبة السائق.",
       "../assets/offroad/icon_monitoring.png",
     },
     {
-      "EndToEndToggle",
-      "\U0001f96c Enable Lane selector Mode \U0001f96c",
-      "Activate lane selection mode. Lane Mode/Lane Less/AUTO can be selected and switched on the screen.",
+      "تمكين وضع محدد المسار",
+      "\U0001f96c تمكين وضع محدد المسار \U0001f96c",
+      "قم بتنشيط وضع اختيار الحارة. يمكن تحديد وضع المسار / تقليل الحارة / AUTO وتشغيله على الشاشة.",
       "../assets/offroad/icon_road.png",
     },
 #ifdef ENABLE_MAPS
     {
-      "NavSettingTime24h",
-      "Show ETA in 24h format",
-      "Use 24h format instead of am/pm",
+      "وقت الوصول صباحا/مساءً او 24 ساعة",
+      "عرض الوقت المقدر للوصول بتنسيق 24 ساعة",
+      "استخدم تنسيق 24 ساعة بدلاً من صباحًا / مساءً",
       "../assets/offroad/icon_metric.png",
     },
 #endif
 
     {
-      "OpkrEnableDriverMonitoring",
-      "Enable Driver Monitoring",
-      "Use the driver monitoring function.",
+      "إعدادات مراقبة السائق",
+      "تمكين مراقبة السائق",
+      "استخدم وظيفة مراقبة السائق.",
       "../assets/offroad/icon_shell.png",
     },
     {
