@@ -63,7 +63,7 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     },
     {
       "RecordFront",
-      "تسجيل وتحميل كاميرا برنامج التشغيل",
+      "تسجيل وتحميل الفيديو لمراقبة السائق لتحسن الاداء في المستقبل",
       "قم بتحميل البيانات من الكاميرا التي تواجه السائق وساعد في تحسين خوارزمية مراقبة السائق.",
       "../assets/offroad/icon_monitoring.png",
     },
