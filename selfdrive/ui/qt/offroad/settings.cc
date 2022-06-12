@@ -63,14 +63,14 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     },
     {
       "RecordFront",
-      "تسجيل وتحميل الفيديو لمراقبة السائق لتحسن الاداء في المستقبل",
+      "تسجيل ورفع البيانات من كميرا السائق ",
       "قم بتحميل البيانات من الكاميرا التي تواجه السائق وساعد في تحسين خوارزمية مراقبة السائق.",
       "../assets/offroad/icon_monitoring.png",
     },
     {
-      "تمكين وضع محدد المسار",
-      "\U0001f96c تمكين وضع محدد المسار \U0001f96c",
-      "قم بتنشيط وضع اختيار الحارة. يمكن تحديد وضع المسار / تقليل الحارة / AUTO وتشغيله على الشاشة.",
+      "تمكين وضع اختيار المسار",
+      "\U0001f96c تمكين وضع اختيار المسار \U0001f96c",
+      "تنشيط وضعية المسارات التلقائية. وضع المسارات/وضع بدون المسارات/وضع التلقائي تستطيع تغير وضعية المسارات من الشاشةالمستخدم.",
       "../assets/offroad/icon_road.png",
     },
 #ifdef ENABLE_MAPS
@@ -96,8 +96,8 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     },
     {
       "OpkrEnableUploader",
-      "Enable Sending Log to Server",
-      "Activate the upload process to transmit system logs and other driving data to the server. Upload it only off-road.",
+      "تمكين ارسال سجل القيادة",
+      "سجل سجل القيادة محليًا لتحليل البيانات. يتم تنشيط المسجلين فقط ولا يتم تحميلهم على الخادم.",
       "../assets/offroad/icon_shell.png",
     },
   };
