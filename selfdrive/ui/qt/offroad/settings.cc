@@ -58,7 +58,7 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     {
       "IsMetric",
       "استخدام النظام المتري",
-      "Display speed in km/h instead of mph.",
+      "عرض السرعة بالكيلو متر بدلاً من ميل امريكي.",
       "../assets/offroad/icon_metric.png",
     },
     {
@@ -91,13 +91,13 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     {
       "OpkrEnableLogger",
       "Enable Driving Log Record",
-      "Record the driving log locally for data analysis. Only loggers are activated and not uploaded to the server.",
+      "سجل القيادة محليًا لتحليل البيانات. يتم تنشيط المسجلين فقط ولا يتم تحميلهم على الخادم.",
       "../assets/offroad/icon_shell.png",
     },
     {
       "OpkrEnableUploader",
       "تمكين ارسال سجل القيادة",
-      "سجل سجل القيادة محليًا لتحليل البيانات. يتم تنشيط المسجلين فقط ولا يتم تحميلهم على الخادم.",
+      "تنشيط المسجل فقط ولا يتم تحميلهم على الخادم.",
       "../assets/offroad/icon_shell.png",
     },
   };
@@ -107,8 +107,8 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
   if (params.getBool("DisableRadar_Allow")) {
     toggles.push_back({
       "DisableRadar",
-      "openpilot Longitudinal Control",
-      "openpilot will disable the car's radar and will take over control of gas and brakes. Warning: this disables AEB!",
+      "التحكم برادار السياة الكامل",
+      "يقوم نظام الذكاء الاصطناعي بتعطيل مكابح الطوترئ وتولي التحكم الكامل من دواسة الوقود ودواسة الفرامل",
       "../assets/offroad/icon_speed_limit.png",
     });
   }
